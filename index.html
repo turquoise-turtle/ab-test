@@ -1,0 +1,38 @@
+<meta charset="utf-8">
+<script src="jstat.min.js"></script>
+<section>
+	<p>A:</p>
+	<span>Wins</span><input type="number" id="aw">
+	<span>Losses</span><input type="number" id="al">
+</section>
+<section>
+	<p>B:</p>
+	<span>Wins</span><input type="number" id="bw">
+	<span>Losses</span><input type="number" id="bl">
+</section>
+<button>Which one?</button>
+<h2></h2>
+<script>
+	var qS = document.querySelector.bind(document);
+	qS('button').addEventListener('click', function(e){
+		var s = Math.random(); //between 0 and 1
+		//var s = 0.5
+		var aw = parseInt(qS('#aw').value);
+		var al = parseInt(qS('#al').value);
+		var bw = parseInt(qS('#bw').value);
+		var bl = parseInt(qS('#bl').value);
+		//console.log(s, aw,al,bw,bl);
+
+		var a = jStat.beta.inv(s, aw, al);
+		//console.log(a);
+		var b = jStat.beta.inv(s, bw, bl);
+		//console.log(b);
+		var winner = a > b ? 'A' : 'B';
+		console.log(s, a,b,winner);
+		qS('h2').innerText = 'Choose ' + winner;
+	});
+	var x = Math.random();
+	var a = jStat.beta.inv(x, 1,2);
+	var b = jStat.beta.inv(x, 1,1);
+	console.log(a > b ? 'a' : 'b');
+</script>
